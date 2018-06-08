@@ -1,4 +1,15 @@
-local _M = { version = "0.1" }
+local _M = { version = "0.1.2" }
+
+local function fileExists(filename)
+
+    local f = io.open(filename,"r")
+    if f ~= nil then 
+        io.close(f) 
+        return true 
+    end 
+    return false 
+
+end
 
 local function readFile(filename)
      
@@ -7,10 +18,21 @@ local function readFile(filename)
         local lines = f:read("*a")
         f:close()
         return lines 
-    else
-        return nil, err
     end
+    return nil, err
 
+end
+
+local function writeFile(filename, text)
+
+    local f, err = io.open(filename, "w+")
+    if f then
+       f:write(text)
+       f:close()
+       return true
+    end
+    return nil, err
+     
 end
 
 function copyTable(t)
@@ -51,6 +73,8 @@ _M.mergeTables = mergeTables
 _M.copyTable = copyTable
 _M.sortTableKeys = sortTableKeys
 _M.readFile = readFile
-return _M
+_M.writeFile = writeFile
+_M.fileExists = fileExists
 
+return _M
 
