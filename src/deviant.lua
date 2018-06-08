@@ -1,4 +1,4 @@
-local _M = { version = "0.1.2" }
+local _M = { version = "0.1.3" }
 
 local function fileExists(filename)
 
@@ -69,12 +69,30 @@ local function sortTableKeys (t)
 
 end
 
+local function moduleAvailable (name)
+
+    if package.loaded[name] then
+        return true
+    else
+        for _, searcher in ipairs(package.searchers or package.loaders) do
+            local loader = searcher(name)
+            if type(loader) == 'function' then
+                package.preload[name] = loader
+                return true
+            end
+        end
+        return false
+    end
+
+end
+
 _M.mergeTables = mergeTables
 _M.copyTable = copyTable
 _M.sortTableKeys = sortTableKeys
 _M.readFile = readFile
 _M.writeFile = writeFile
 _M.fileExists = fileExists
+_M.moduleAvailable = moduleAvailable
 
 return _M
 
