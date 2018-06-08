@@ -1,9 +1,17 @@
+-- This file was automatically generated for the LuaDist project.
+
 package = "deviant"
- version = "0.1-1"
- source = {
-    url = "https://git.deviant.guru/luarocks/deviant/archive/v0.1-1.zip",
-    dir = "deviant",
- }
+ version = "0.1-2"
+-- LuaDist source
+source = {
+  tag = "0.1-2",
+  url = "git://github.com/LuaDist-testing/deviant.git"
+}
+-- Original source
+--  source = {
+--     url = "https://git.deviant.guru/luarocks/deviant/archive/v0.1-1.zip",
+--     dir = "deviant",
+--  }
  description = {
     summary = "A set of small useful functions extending lua's standard library",
     detailed = [[
@@ -19,6 +27,6 @@ package = "deviant"
  build = {
     type = "builtin",
     modules = {
-       ext = "src/deviant.lua"
+       deviant = "src/deviant.lua"
     }
  }
